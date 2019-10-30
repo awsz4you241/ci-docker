@@ -1,0 +1,16 @@
+version: '3.7'
+services:
+  #①
+  api-service:
+    build: api-server
+    container_name: api-server
+    ports:
+      - 8081:3000
+  #②
+  test-service:
+    build: test-batch
+    depends_on:
+      - api-service
+    environment:
+      API_HOST: api-service
+    container_name: test-batch
